@@ -1,5 +1,5 @@
 $res=@()
-$dt=gci "HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\SystemAppData\Microsoft.ZuneMusic_8wekyb3d8bbwe\PersistedStorageItemTable\ManagedByApp"
+$dt=gci "Registry::HKCR\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\SystemAppData\Microsoft.ZuneMusic_8wekyb3d8bbwe\PersistedStorageItemTable\ManagedByApp"
 $dt|%{
   $path=$_.GetValue('FilePath')
   $res+=[pscustomobject]@{
