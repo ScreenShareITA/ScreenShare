@@ -8,4 +8,4 @@ $dt|%{
     Source=$_.Name
   }
 }
-$res|ogv -t "ZuneMusic Artifact Parser | Made by Katoylla for SSITA (https://discord.gg/ssita) | values parsed: $($res.count)"
+$res|ogv -t "ZuneMusic Artifact Parser | Made by Katoylla for SSITA (https://discord.gg/ssita) | values parsed: $($res.count)" -passthru
