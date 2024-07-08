@@ -1,8 +1,9 @@
 $ErrorActionPreference="SilentlyContinue"
-write-host -f red "\n ____  ____  __  ____  __     ____   ___   __   ____  ____ 
+write-host -f red "
+ ____  ____  __  ____  __     ____   ___   __   ____  ____ 
 / ___)/ ___)(  )(_  _)/ _\   (  _ \ / __) / _\ (    \(  _ \
 \___ \\___ \ )(   )( /    \   ) __/( (__ /    \ ) D ( ) _ (
-(____/(____/(__) (__)\_/\_/  (__)   \___)\_/\_/(____/(____/\n"
+(____/(____/(__) (__)\_/\_/  (__)   \___)\_/\_/(____/(____/"
 write-host -n "Made by ";write-host -f blue -n "Katoylla ";write-host -n "for ";write-host -f red -n "SSITA";write-host -n "(";write-host -f red -n "https://discord.gg/ssita";write-host ")"
 $res = [System.Collections.Generic.List[PSObject]]::new()
 $p="$env:windir\appcompat\pca\PcaGeneralDb0.txt"
