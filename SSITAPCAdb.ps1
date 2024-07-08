@@ -1,4 +1,5 @@
 $ErrorActionPreference="SilentlyContinue"
+cls
 write-host -f red "
  ____  ____  __  ____  __     ____   ___   __   ____  ____ 
 / ___)/ ___)(  )(_  _)/ _\   (  _ \ / __) / _\ (    \(  _ \
