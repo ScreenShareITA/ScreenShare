@@ -22,6 +22,7 @@ $raw = (gc $p -raw) -split "\r?\n"
 $raw|%{
   $curr=$_ -split "\|";
   $p=[System.IO.Path]::GetFullPath([System.Environment]::ExpandEnvironmentVariables($curr[2]))
+  $n=split-path -le $p
   if(test-path $p){
     if(test-path -patht leaf $p]){
       $f=(get-authenticodesignature $p)
@@ -32,6 +33,8 @@ $raw|%{
     $f="Path non trovata"
   }
   $res.add([pscustomobject]@{
+    DigitalSignature=$f
+    FileName=$n
     ExecutionTime=$curr[0]
     RunStatus=$curr[1]
     Path=$p
@@ -40,7 +43,6 @@ $raw|%{
     FileVersion=$curr[5]
     AmcacheProgramID=$curr[6]
     ExitCode=$curr[7]
-    FirmaDigitale=$f
   })
 }
 $res|ogv -t "PCA General DataBase Parser | Made by Katoylla for SSITA (https://discord.gg/ssita) | values parsed: $($res.count)" -passthru
