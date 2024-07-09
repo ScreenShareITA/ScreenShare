@@ -22,7 +22,15 @@ $raw = (gc $p -raw) -split "\r?\n"
 $raw|%{
   $curr=$_ -split "\|";
   $curr[2]=[System.IO.Path]::GetFullPath([System.Environment]::ExpandEnvironmentVariables($curr[2]))
-  $test=test-path $curr[2]
+  if(test-path $curr[2]){
+    if(test-path -patht leaf $curr[2]){
+      $f=(get-authenticodesignature $curr[2])
+    }else{
+      $f="La path punta a una cartella"
+    }
+  }else{
+    $f="Path non trovata"
+  }
   $res.add([pscustomobject]@{
     ExecutionTime=$curr[0]
     RunStatus=$curr[1]
@@ -32,15 +40,7 @@ $raw|%{
     FileVersion=$curr[5]
     AmcacheProgramID=$curr[6]
     ExitCode=$curr[7]
-    if((test-path $curr[2])){
-      if((test-path -patht leaf $curr[2])){
-        FirmaDigitale=(get-authenticodesignature $curr[2])
-      }else{
-        FirmaDigitale="La path punta a una cartella"
-      }
-    }else{
-      FirmaDigitale="Path non trovata"
-    }
+    FirmaDigitale=$f
   })
 }
 $res|ogv -t "PCA General DataBase Parser | Made by Katoylla for SSITA (https://discord.gg/ssita) | values parsed: $($res.count)" -passthru
