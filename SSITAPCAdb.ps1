@@ -32,8 +32,8 @@ $raw|%{
     FileVersion=$curr[5]
     AmcacheProgramID=$curr[6]
     ExitCode=$curr[7]
-    if(test-path $curr[2]){
-      if(test-path -patht leaf $curr[2]){
+    if((test-path $curr[2])){
+      if((test-path -patht leaf $curr[2])){
         FirmaDigitale=(get-authenticodesignature $curr[2])
       }else{
         FirmaDigitale="La path punta a una cartella"
