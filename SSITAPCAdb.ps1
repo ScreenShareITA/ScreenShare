@@ -1,11 +1,12 @@
 $ErrorActionPreference="SilentlyContinue"
 cls
-write-host -f red "
- ____  ____  __  ____  __     ____   ___   __   ____  ____ 
-/ ___)/ ___)(  )(_  _)/ _\   (  _ \ / __) / _\ (    \(  _ \
-\___ \\___ \ )(   )( /    \   ) __/( (__ /    \ ) D ( ) _ (
-(____/(____/(__) (__)\_/\_/  (__)   \___)\_/\_/(____/(____/"
-write-host -n "Made by ";write-host -f blue -n "Katoylla ";write-host -n "for ";write-host -f red -n "SSITA";write-host -n "(";write-host -f red -n "https://discord.gg/ssita";write-host ")"
+write-host -f red "███████╗███████╗██╗████████╗ █████╗     ██████╗  ██████╗ █████╗ ██████╗ ██████╗ 
+██╔════╝██╔════╝██║╚══██╔══╝██╔══██╗    ██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔══██╗
+███████╗███████╗██║   ██║   ███████║    ██████╔╝██║     ███████║██║  ██║██████╔╝
+╚════██║╚════██║██║   ██║   ██╔══██║    ██╔═══╝ ██║     ██╔══██║██║  ██║██╔══██╗
+███████║███████║██║   ██║   ██║  ██║    ██║     ╚██████╗██║  ██║██████╔╝██████╔╝
+╚══════╝╚══════╝╚═╝   ╚═╝   ╚═╝  ╚═╝    ╚═╝      ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═════╝ "
+write-host -n -f cyan "Made by ";write-host -f blue -n "Katoylla ";write-host -n -f cyan "for ";write-host -f red -n "SSITA";write-host -n "(";write-host -f red -n "https://discord.gg/ssita";write-host ")"
 $res = [System.Collections.Generic.List[PSObject]]::new()
 $p="$env:windir\appcompat\pca\PcaGeneralDb0.txt"
 if(!(test-path $p)){
@@ -23,7 +24,9 @@ $raw|%{
   $res.add([pscustomobject]@{
     ExecutionTime=$curr[0]
     RunStatus=$curr[1]
-    Path=$curr[2]
+    if($curr -match "^%"){
+     Path=[System.IO.Path]::GetFullPath([System.Environment]::ExpandEnvironmentVariables($curr[2]))
+    }else{Path=$curr[2]}
     FileDescription=$curr[3]
     SoftwareVendor=$curr[4]
     FileVersion=$curr[5]
