@@ -24,7 +24,7 @@ $raw|%{
   $res.add([pscustomobject]@{
     ExecutionTime=$curr[0]
     RunStatus=$curr[1]
-    if($curr -match "^%"){
+    if($curr[2] -match "^%"){
      Path=[System.IO.Path]::GetFullPath([System.Environment]::ExpandEnvironmentVariables($curr[2]))
     }else{Path=$curr[2]}
     FileDescription=$curr[3]
