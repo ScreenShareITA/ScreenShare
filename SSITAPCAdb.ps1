@@ -32,7 +32,15 @@ $raw|%{
     FileVersion=$curr[5]
     AmcacheProgramID=$curr[6]
     ExitCode=$curr[7]
-    if()
+    if(test-path $curr[2]){
+      if(test-path -patht leaf $curr[2]){
+        FirmaDigitale=(get-authenticodesignature $curr[2])
+      }else{
+        FirmaDigitale="La path punta a una cartella"
+      }
+    }else{
+      FirmaDigitale="Path non trovata"
+    }
   })
 }
 $res|ogv -t "PCA General DataBase Parser | Made by Katoylla for SSITA (https://discord.gg/ssita) | values parsed: $($res.count)" -passthru
