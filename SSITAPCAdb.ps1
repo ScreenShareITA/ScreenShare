@@ -21,10 +21,10 @@ if(!(test-path $p)){
 $raw = (gc $p -raw) -split "\r?\n"
 $raw|%{
   $curr=$_ -split "\|";
-  $curr[2]=[System.IO.Path]::GetFullPath([System.Environment]::ExpandEnvironmentVariables($curr[2]))
-  if(test-path $curr[2]){
-    if(test-path -patht leaf $curr[2]){
-      $f=(get-authenticodesignature $curr[2])
+  $p=[System.IO.Path]::GetFullPath([System.Environment]::ExpandEnvironmentVariables($curr[2]))
+  if(test-path $p){
+    if(test-path -patht leaf $p]){
+      $f=(get-authenticodesignature $p)
     }else{
       $f="La path punta a una cartella"
     }
@@ -34,7 +34,7 @@ $raw|%{
   $res.add([pscustomobject]@{
     ExecutionTime=$curr[0]
     RunStatus=$curr[1]
-    Path=$curr[2]
+    Path=$p
     FileDescription=$curr[3]
     SoftwareVendor=$curr[4]
     FileVersion=$curr[5]
