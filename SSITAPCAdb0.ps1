@@ -19,6 +19,8 @@ if(!(test-path $p)){
   }else{
     write "Cartella pca non presente. Probabilmente dipende dal pc dell'utente prosegui con l'ss"
   }
+  write-host "Sotto trovi lo status di pcasvc se è stoppato decidi se bannare per servizio stoppato"
+  gsv pcasvc
   sleep 5
   exit
 }
