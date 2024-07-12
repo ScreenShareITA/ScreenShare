@@ -11,7 +11,7 @@ write-host -n -f cyan "Fatto da ";write-host -f blue -n "Katoylla ";write-host -
 }
 write-title
 $res = [System.Collections.Generic.List[PSObject]]::new()
-$fp="$env:windir\appcompat\pca\PcaGeneralDb0.txt"
+$p="$env:windir\appcompat\pca\PcaGeneralDb0.txt"
 if(!(test-path $p)){
   write "File non trovato nella path: $p"
   if(test-path "$env:windir\appcompat\pca"){
