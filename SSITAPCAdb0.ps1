@@ -65,4 +65,4 @@ for($i=0;$i -lt $cp.count;$i++){
     write-host -n ($cp[$i]+" | ")
     write-host -f red $cs[$i]
 }
-$res|ogv -t "PCA DataBase Parser | Made by Katoylla for SSITA (https://discord.gg/ssita) | values parsed: $($res.count) | files parsed: $($cp.count) " -passthru
+$res|ogv -t "PCA DataBase Parser | Fatto da Katoylla per SSITA (https://discord.gg/ssita) | valori trovati: $($res.count) | file trovati: $($cp.count) " -passthru
