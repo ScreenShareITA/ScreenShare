@@ -1,4 +1,4 @@
-﻿$ErrorActionPreference="SilentlyContinue"
+﻿$ErrorActionPreference = "SilentlyContinue"
 function write-title(){
 cls
 write-host -f red "███████╗███████╗██╗████████╗ █████╗     ██████╗  ██████╗ █████╗ ██████╗ ██████╗ 
