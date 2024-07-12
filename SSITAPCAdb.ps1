@@ -18,7 +18,7 @@ if(!(test-path $p)){
   }
   exit
 }
-$raw = (gc $p -raw) -split "\r?\n"
+$raw = gc $p -en Unicode
 $raw|%{
   $curr=$_ -split "\|";
   $p=[System.IO.Path]::GetFullPath([System.Environment]::ExpandEnvironmentVariables($curr[2]))
