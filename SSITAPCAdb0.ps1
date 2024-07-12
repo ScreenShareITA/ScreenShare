@@ -19,7 +19,7 @@ if(!(test-path $p)){
   }else{
     write "Cartella pca non presente. Probabilmente dipende dal pc dell'utente prosegui con l'ss"
   }
-  exit
+  write-host -f red "Clicca ctrl+c per terminare il programma."
 }
 $raw=gc $p -en Unicode
 $cs=@()
