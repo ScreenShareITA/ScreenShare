@@ -1,13 +1,13 @@
-﻿$ErrorActionPreference = "SilentlyContinue"
+﻿$ErrorActionPreference = "si"
 function write-title(){
 cls
-write-host -f red "███████╗███████╗██╗████████╗ █████╗     ██████╗  ██████╗ █████╗ ██████╗ ██████╗ 
+write-host -f r "███████╗███████╗██╗████████╗ █████╗     ██████╗  ██████╗ █████╗ ██████╗ ██████╗ 
 ██╔════╝██╔════╝██║╚══██╔══╝██╔══██╗    ██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔══██╗
 ███████╗███████╗██║   ██║   ███████║    ██████╔╝██║     ███████║██║  ██║██████╔╝
 ╚════██║╚════██║██║   ██║   ██╔══██║    ██╔═══╝ ██║     ██╔══██║██║  ██║██╔══██╗
 ███████║███████║██║   ██║   ██║  ██║    ██║     ╚██████╗██║  ██║██████╔╝██████╔╝
 ╚══════╝╚══════╝╚═╝   ╚═╝   ╚═╝  ╚═╝    ╚═╝      ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═════╝ "
-write-host -n -f cyan "Fatto da ";write-host -f blue -n "Katoylla ";write-host -n -f cyan "per ";write-host -f red -n "SSITA";write-host -n " (";write-host -f red -n "https://discord.gg/ssita";write-host ")"
+write-host -n -f c "Fatto da ";write-host -f blu -n "Katoylla ";write-host -n -f c "per ";write-host -f r -n "SSITA";write-host -n " (";write-host -f r -n "https://discord.gg/ssita";write-host ")"
 }
 write-title
 $res = [System.Collections.Generic.List[PSObject]]::new()
@@ -35,7 +35,7 @@ $raw|%{
   $pos=$cp.indexof($p)
   if($pos -eq -1){
     if(test-path $p){
-        if(test-path -patht leaf $p){
+        if(test-path -patht l $p){
             $f=(get-authenticodesignature $p).status
         }else{
             $f="La path punta a una cartella"
@@ -45,9 +45,9 @@ $raw|%{
     }
     $cp+=$p
     $cs+=$f
-    write-host -f red " Nuovo file elaborato, numero di file trovati fino ad adesso --> $($cp.count)"
+    write-host -f r " Nuovo file elaborato, numero di file trovati fino ad adesso --> $($cp.count)"
   }else{
-    write-host -f red " File già elaborato in precedenza, ottimizzata la fase di controllo"
+    write-host -f r " File già elaborato in precedenza, ottimizzata la fase di controllo"
     $f=$cs[$pos]
   }
   $res.add([pscustomobject]@{
