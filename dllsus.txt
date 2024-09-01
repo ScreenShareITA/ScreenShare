@@ -83,6 +83,7 @@ c:\users\%username%\appdata\local\fivem\fivem.app\mojo.dll
 c:\users\%username%\appdata\local\fivem\fivem.app\net.dll
 c:\users\%username%\appdata\local\fivem\fivem.app\net-base.dll
 c:\users\%username%\appdata\local\fivem\fivem.app\net-http-server.dll
+c:\users\%username%\appdata\local\fivem\fivem.app\net-packet.dll
 c:\users\%username%\appdata\local\fivem\fivem.app\net-tcp-server.dll
 c:\users\%username%\appdata\local\fivem\fivem.app\nng.dll
 c:\users\%username%\appdata\local\fivem\fivem.app\node.dll
@@ -111,6 +112,7 @@ c:\users\%username%\appdata\local\fivem\fivem.app\vfs-core.dll
 c:\users\%username%\appdata\local\fivem\fivem.app\vfs-impl-rage.dll
 c:\users\%username%\appdata\local\fivem\fivem.app\voip-mumble.dll
 c:\users\%username%\appdata\local\fivem\fivem.exe
+c:\users\%username%\appdata\local\medal\recorder-3.883.0\host\medal-hook64.dll
 c:\users\%username%\appdata\local\medal\recorder-3.856.0\host\medal-hook64.dll
 c:\windows\system32\acgenral.dll
 c:\windows\system32\advapi32.dll
@@ -330,3 +332,4 @@ c:\windows\system32\xinput9_1_0.dll
 c:\windows\system32\xmllite.dll
 c:\windows\winsxs\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.22621.3672_none_2713b9d173822955\comctl32.dll
 c:\windows\winsxs\amd64_microsoft.windows.gdiplus_6595b64144ccf1df_1.1.22621.3810_none_57f8d842ce19d879\gdiplus.dll
+
