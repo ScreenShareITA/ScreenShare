@@ -17,4 +17,4 @@ $fd|%{
     }
 }
 write $sus
-write $sus.name
+write $sus.filename
