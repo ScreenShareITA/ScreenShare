@@ -17,3 +17,4 @@ $fd|%{
     }
 }
 write $sus
+write $sus.name
