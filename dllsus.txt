@@ -118,6 +118,9 @@ c:\users\%username%\appdata\local\fivem\fivem.app\voip-mumble.dll
 c:\users\%username%\appdata\local\fivem\fivem.exe
 c:\users\%username%\appdata\local\medal\recorder-3.856.0\host\medal-hook64.dll
 c:\users\%username%\appdata\local\medal\recorder-3.883.0\host\medal-hook64.dll
+c:\users\super\appdata\%username%\fivem\fivem.app\data\cache\subprocess\fivem_b3258_dumpserver
+c:\users\super\appdata\%username%\fivem\fivem.app\data\cache\subprocess\fivem_b3258_gtaprocess.exe
+c:\users\super\appdata\%username%\medal\recorder-3.889.0\host\medal-hook64.dll
 c:\windows\system32\acgenral.dll
 c:\windows\system32\advapi32.dll
 c:\windows\system32\amdihk64.dll
