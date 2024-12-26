@@ -1,4 +1,4 @@
-﻿$ErrorActionPreference = "SilentlyContinue";
+$ErrorActionPreference = "SilentlyContinue";
 function TimeToRelString {
     param ([DateTime]$time)
     $rtime=(Get-Date)-$time;
