@@ -1,4 +1,4 @@
-$ErrorActionPreference = "SilentlyContinue";
+﻿$ErrorActionPreference = "SilentlyContinue";
 function TimeToRelString {
     param ([DateTime]$time)
     $rtime=(Get-Date)-$time;
@@ -93,6 +93,6 @@ foreach($name in $servicenames){
     }
     $result.add($ogg)|Out-Null
 }
-$result = $result|Sort-Object starttime,status,type
+$result = $result|Sort-Object "Start Time",Status,Type
 #$result|ft -a
 $result|Out-GridView -Title "SSITA Service Informer | Developed by KernelCore (https://discord.gg/ssita) | $("Elapsed Time: "+(TimeToRelString $starttime)) - $("Boot RelTime: "+(TimeToRelString (gcim Win32_OperatingSystem).LastBootUpTime))";
