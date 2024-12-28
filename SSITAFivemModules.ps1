@@ -33,7 +33,7 @@ if($processi){
     }
     Write-Output $modulisus
     Write-Host -ForegroundColor Blue "Dll Sospetti:"
-    Write ($modulisus.filename.ToLower()|Sort-Object|Select-Object -Unique
+    Write-Output ($modulisus.filename.ToLower()|Sort-Object|Select-Object -Unique
     #|ForEach-Object{$_ -replace "\\super\\","\%username%\"}
     )
 }else{
