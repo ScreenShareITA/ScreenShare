@@ -1,7 +1,19 @@
 $ErrorActionPreference = "SilentlyContinue";
-function TimeToRelString {
+$boot = (gcim Win32_OperatingSystem).LastBootUpTime;
+function TimeRelToStartString {
     param ([DateTime]$time)
-    $rtime=(Get-Date)-$time;
+    return TimeConfrontString $time (Get-Date);
+}
+function TimeRelToBootString {
+    param ([DateTime]$time)
+    return TimeConfrontString ($boot) $time;
+}
+function TimeConfrontString {
+    param(
+        [DateTime]$time,
+        [Datetime]$time2
+        )
+    $rtime=$time2-$time;
     $rstring = "";
     $rdays = $rtime.Days;
     $rhours = $rtime.Hours;
@@ -18,9 +30,9 @@ function TimeToRelString {
     $rstring += "$($rtime.Seconds).$($rtime.Milliseconds) seconds";
     return $rstring;
 }
+
 $starttime = (Get-Date);
 $result = [System.Collections.ArrayList]@();
-
 $cdpu = Get-Service|Where-Object{$_.Name -like "CDPUserSvc_*"};
 #processes to add maybe AggregatorHost WmiPrvSE taskhostw nvcontainer SearchHost StartMenuExperienceHost CHXSmartScreen SmartScreen OpenWith (maybe conhost consent)
 $servicenames = "AHCache","Appinfo","AUEPLauncher","BAM","BFE",$cdpu.Name,"CryptSvc","CTFMon","DiagTrack","Dnscache","DPS","DusmSvc","EventLog","Explorer","InventorySvc","MDCoreSvc","mpsdrv","mpssvc","Ndu","PcaSvc","PlugPlay","Schedule","SIHost","StorSvc","SysMain","volsnap","WdFilter","WdNisDrv","WinDefend","WSearch";
@@ -38,13 +50,14 @@ foreach($name in $servicenames){
         Status=$null;
         Type=$null;
         "Start Mode"=$null;
-        "Process Name"=$null;
-        PID=$null;
-        "Start Time"=$null;
-        "Relative Start Time"=$null;
-        "Suspended Threads"=$null;
+        "Process Name"="//";
+        PID="//";
+        "Start Time"="//";
+        "Relative Start Time"="//";
+        "Boot Relative Start Time"="//";
+        "Suspended Threads"="//";
     }
-    $processo = $null;$service=$null;$wmisv=$null;
+    $processi = $null;$service=$null;$wmisv=$null;
     Write-Host -ForegroundColor blu "Checking $name"
     $service = Get-Service $name;
     if($service){
@@ -54,15 +67,15 @@ foreach($name in $servicenames){
         if($wmisv){
             $ogg.Type="Service";
             if($ogg.Status -ne "Stopped"){
-                $processo = Get-Process -id $wmisv.ProcessId;
+                $processi = Get-Process -id $wmisv.ProcessId;
             }
         }else{
             $ogg.Type="Driver";
             $wmisv = $drivers|Where-Object{$_.name -eq $name}
         }
     }else{
-        $processo = Get-Process $name;
-        if($processo){
+        $processi = Get-Process $name;
+        if($processi){
             $ogg.Type="Process";
             $ogg.Status="Running";
             $ogg."Start Mode"="??"
@@ -74,19 +87,33 @@ foreach($name in $servicenames){
     }
 
 
-    if($processo){
-        $ogg.PID = $processo.Id;
-        $ogg."Process Name" = $processo.Name;
-        $ogg."Start Time" = $processo.StartTime;
-        $ogg."Relative Start Time" = "Process has been running for "+(TimeToRelString ($ogg."Start Time")[0]);
-        $threads=$processo.Threads;
+    if($processi){
+        $processi=$processi|Sort-Object StartTime
+        $ogg.PID = $processi.Id-join"`n";
+        $ogg."Process Name" = $processi.Name-join"`n";
+        $ogg."Start Time" = $processi.StartTime-join"`n";
+        $ogg."Relative Start Time" = ($processi|ForEach-Object{"Process has been running for "+(TimeRelToStartString $_.StartTime)})-join"`n"
+        $ogg."Boot Relative Start Time" = ($processi|ForEach-Object{TimeRelToBootString $_.StartTime})-join"`n"
+        $threads=$processi.Threads;
         $susthreads=$threads|Where-Object{$_.waitreason -eq "Suspended"}
-
-        #confronto tra main thread name e process file name ecc..
+        <#$processi|ForEach-Object{
+            $m=$_.MainModule
+            if($m){
+                # description fileversionifo ecc.. also size in fileversion info original name ecc..
+                $fl=$_.Path.tolower()
+                $ofl=$m.Filename.tolower()
+                Write-Host "$fl $ofl"
+                if($fl -ne $ofl){
+                    Write-Host -ForegroundColor Red "Filepath mismatch found:`nOriginal filepath --> $ofl`nCurrent filepath --> $fl"
+                }
+            }else{
+                Write-Host -ForegroundColor Red "I'm not able to find the main module for $($_.Name)"
+            }
+        }#>
 
         if($susthreads){
-            $ids = $susthreads.id-join','
-            Write-Host -ForegroundColor Red "Found suspended threads for $name - $($ogg."Process Name"):",$ids;
+            $ids = $susthreads.id-join', '
+            Write-Host -ForegroundColor Red "Found suspended threads for $name - $($ogg."Process Name") $($susthreads.Count)/$($threads.Count):",$ids;
             $ogg."Suspended Threads" = $ids
         }
 
@@ -95,4 +122,5 @@ foreach($name in $servicenames){
 }
 $result = $result|Sort-Object "Start Time",Status,Type
 #$result|ft -a
-$result|Out-GridView -Title "SSITA Service Informer | Developed by KernelCore (https://discord.gg/ssita) | $("Elapsed Time: "+(TimeToRelString $starttime)) - $("Boot RelTime: "+(TimeToRelString (gcim Win32_OperatingSystem).LastBootUpTime))";
+$result|Out-GridView -Title "SSITA Service Informer | Developed by KernelCore (https://discord.gg/ssita) | Elapsed Time: $(TimeRelToStartString $starttime) - Boot RelTime: $(TimeRelToStartString $boot)";
+Read-Host
